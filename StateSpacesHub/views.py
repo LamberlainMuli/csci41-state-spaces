@@ -35,7 +35,7 @@ class BuildingCreateView(CreateView):
     model = Building
     form_class = BuildingForm
     template_name = 'buildingCreate.html'
-    success_url = reverse_lazy('StateSpacesHub:building-list')
+    success_url = reverse_lazy('StateSpacesHub:building')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -47,7 +47,7 @@ class BuildingUpdateView(UpdateView):
     model = Building
     form_class = BuildingForm
     template_name = 'buildingUpdate.html'
-    success_url = reverse_lazy('StateSpacesHub:building-list')
+    success_url = reverse_lazy('StateSpacesHub:building')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -86,7 +86,7 @@ class VenueCreateView(CreateView):
     model = Venue
     form_class = VenueForm
     template_name = 'venueCreate.html'
-    success_url = reverse_lazy('StateSpacesHub:venue-list')
+    success_url = reverse_lazy('StateSpacesHub:venue')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -98,7 +98,7 @@ class VenueUpdateView(UpdateView):
     model = Venue
     form_class = VenueForm
     template_name = 'venueUpdate.html'
-    success_url = reverse_lazy('StateSpacesHub:venue-list')
+    success_url = reverse_lazy('StateSpacesHub:venue')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -135,7 +135,7 @@ class AmenityCreateView(CreateView):
     model = Amenity
     form_class = AmenityForm
     template_name = 'amenityCreate.html'
-    success_url = reverse_lazy('StateSpacesHub:amenity-list')
+    success_url = reverse_lazy('StateSpacesHub:amenity')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -147,7 +147,7 @@ class AmenityUpdateView(UpdateView):
     model = Amenity
     form_class = AmenityForm
     template_name = 'amenityUpdate.html'
-    success_url = reverse_lazy('StateSpacesHub:amenity-list')
+    success_url = reverse_lazy('StateSpacesHub:amenity')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
