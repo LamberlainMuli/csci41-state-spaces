@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Amenities
+{% endblock title %}
+{% block content %}
+  <h2>All Amenities:</h2>
+  <ul>
+      {% for amenity in amenities %}
+        <li>{{ amenity.venue }}</li>
+        <li>{{ amenity.amenity_type }}</li>
+        <li>{{ amenity.amenity_description }}</li>
+      {% endfor %}
+  </ul>
+{% endblock content %}
