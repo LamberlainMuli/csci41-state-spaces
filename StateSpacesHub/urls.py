@@ -38,10 +38,10 @@ urlpatterns = [
     # path('reservation/add', ReservationCreateView.as_view(), name='reservation_add'),
     # path('reservation/<int:pk>/edit', ReservationUpdateView.as_view(), name='reservation_edit'),
 
-    # path('renovation/list', renovationListView.as_view(), name='renovation'),
-    # path('renovation/<int:pk>', renovationDetailView.as_view(), name='renovation_detail'),
-    # path('renovation/add', renovationCreateView.as_view(), name='renovation_add'),
-    # path('renovation/<int:pk>/edit', renovationUpdateView.as_view(), name='renovation_edit'),
+    # path('renovation/list', RenovationListView.as_view(), name='renovation'),
+    # path('renovation/<int:pk>', RenovationDetailView.as_view(), name='renovation_detail'),
+    # path('renovation/add', RenovationCreateView.as_view(), name='renovation_add'),
+    # path('renovation/<int:pk>/edit', RenovationUpdateView.as_view(), name='renovation_edit'),
 
 ]
 
