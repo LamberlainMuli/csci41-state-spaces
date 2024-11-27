@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Buildings
+{% endblock title %}
+{% block content %}
+  <h2>All Buildings:</h2>
+  <ul>
+      {% for building in buildings %}
+        <li>{{ building.building_name }}</li>
+        
+      {% endfor %}
+  </ul>
+{% endblock content %}
