@@ -1,6 +1,10 @@
 from django.urls import path
 from .views import BuildingListView, BuildingDetailView, VenueListView, VenueDetailView, AmenityListView, AmenityDetailView
 from .views import BuildingCreateView, BuildingUpdateView, VenueCreateView, VenueUpdateView, AmenityCreateView, AmenityUpdateView
+# from .views import AgentListView, AgentDetailView, AgentCreateView, AgentUpdateView, TeamMemberListView, TeamMemberDetailView
+# from .views import TeamMemberCreateView, TeamMemberUpdateView, CustomerListView, CustomerDetailView, CustomerCreateView, CustomerUpdateView
+# from .views import ReservationListView, ReservationDetailView, ReservationCreateView, ReservationUpdateView, RenovationListView, RenovationDetailView
+# from .views import RenovationCreateView, RenovationUpdateView
 
 urlpatterns = [
     path('building/list', BuildingListView.as_view(), name='building'),
