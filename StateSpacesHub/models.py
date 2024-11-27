@@ -1,7 +1,5 @@
 from django.db import models
 
-from django.db import models
-
 # Building Model
 class Building(models.Model):
     building_name = models.CharField(max_length=255)
@@ -42,12 +40,12 @@ class Venue(models.Model):
     # Ensure Venue has at least one Amenity
     def save(self, *args, **kwargs):
         super(Venue, self).save(*args, **kwargs)  # Save the venue first
-        if not VenueAmenity.objects.filter(venue=self).exists():  # Check if no amenities exist
-            default_amenity = Amenity.objects.create(
+        if not self.amenities.exists():  # Check if no amenities exist
+            Amenity.objects.create(
+                venue=self,
                 amenity_type="Default Amenity",
                 amenity_description="Basic amenity provided for this venue."
             )
-            VenueAmenity.objects.create(venue=self, amenity=default_amenity, amenity_quantity=1)
 
     @property
     def venue_location(self):
@@ -56,27 +54,12 @@ class Venue(models.Model):
 
 # Amenity Model
 class Amenity(models.Model):
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='amenities')  # Tied to one Venue
     amenity_type = models.CharField(max_length=255)
     amenity_description = models.TextField()
 
-    # Ensure Amenity is linked to at most one Venue
-    def save(self, *args, **kwargs):
-        if VenueAmenity.objects.filter(amenity=self).count() > 1:
-            raise ValueError("An amenity can only belong to one venue.")
-        super(Amenity, self).save(*args, **kwargs)
-
     def __str__(self):
         return self.amenity_type
-
-
-# Venue Amenity Junction Table
-class VenueAmenity(models.Model):
-    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
-    amenity = models.OneToOneField(Amenity, on_delete=models.CASCADE)  # Ensure amenity is linked to at most one venue
-    amenity_quantity = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f"{self.amenity} in {self.venue}"
 
 
 
