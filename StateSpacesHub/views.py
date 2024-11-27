@@ -9,7 +9,7 @@ from .forms import BuildingForm, VenueForm, AmenityForm
 # Building Views
 class BuildingListView(ListView):
     model = Building
-    template_name = 'buildingList.html'
+    template_name = 'building/buildingList.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -21,7 +21,7 @@ class BuildingListView(ListView):
 
 class BuildingDetailView(DetailView):
     model = Building
-    template_name = 'buildingDetail.html'
+    template_name = 'building/buildingDetail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -34,7 +34,7 @@ class BuildingDetailView(DetailView):
 class BuildingCreateView(CreateView):
     model = Building
     form_class = BuildingForm
-    template_name = 'buildingCreate.html'
+    template_name = 'building/buildingCreate.html'
     success_url = reverse_lazy('StateSpacesHub:building')
 
     def get_context_data(self, **kwargs):
@@ -46,7 +46,7 @@ class BuildingCreateView(CreateView):
 class BuildingUpdateView(UpdateView):
     model = Building
     form_class = BuildingForm
-    template_name = 'buildingUpdate.html'
+    template_name = 'building/buildingUpdate.html'
     success_url = reverse_lazy('StateSpacesHub:building')
 
     def get_context_data(self, **kwargs):
@@ -59,7 +59,7 @@ class BuildingUpdateView(UpdateView):
 # Venue Views
 class VenueListView(ListView):
     model = Venue
-    template_name = 'venueList.html'
+    template_name = 'venue/venueList.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -71,7 +71,7 @@ class VenueListView(ListView):
 
 class VenueDetailView(DetailView):
     model = Venue
-    template_name = 'venueDetail.html'
+    template_name = 'venue/venueDetail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -85,7 +85,7 @@ class VenueDetailView(DetailView):
 class VenueCreateView(CreateView):
     model = Venue
     form_class = VenueForm
-    template_name = 'venueCreate.html'
+    template_name = 'venue/venueCreate.html'
     success_url = reverse_lazy('StateSpacesHub:venue')
 
     def get_context_data(self, **kwargs):
@@ -97,7 +97,7 @@ class VenueCreateView(CreateView):
 class VenueUpdateView(UpdateView):
     model = Venue
     form_class = VenueForm
-    template_name = 'venueUpdate.html'
+    template_name = 'venue/venueUpdate.html'
     success_url = reverse_lazy('StateSpacesHub:venue')
 
     def get_context_data(self, **kwargs):
@@ -110,7 +110,7 @@ class VenueUpdateView(UpdateView):
 # Amenity Views
 class AmenityListView(ListView):
     model = Amenity
-    template_name = 'amenityList.html'
+    template_name = 'amenity/amenityList.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -121,7 +121,7 @@ class AmenityListView(ListView):
 
 class AmenityDetailView(DetailView):
     model = Amenity
-    template_name = 'amenityDetail.html'
+    template_name = 'amenity/amenityDetail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -134,7 +134,7 @@ class AmenityDetailView(DetailView):
 class AmenityCreateView(CreateView):
     model = Amenity
     form_class = AmenityForm
-    template_name = 'amenityCreate.html'
+    template_name = 'amenity/amenityCreate.html'
     success_url = reverse_lazy('StateSpacesHub:amenity')
 
     def get_context_data(self, **kwargs):
@@ -146,7 +146,7 @@ class AmenityCreateView(CreateView):
 class AmenityUpdateView(UpdateView):
     model = Amenity
     form_class = AmenityForm
-    template_name = 'amenityUpdate.html'
+    template_name = 'amenity/amenityUpdate.html'
     success_url = reverse_lazy('StateSpacesHub:amenity')
 
     def get_context_data(self, **kwargs):
