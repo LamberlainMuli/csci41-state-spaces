@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Customers
+{% endblock title %}
+{% block content %}
+  <h2>All Customers:</h2>
+  <ul>
+      {% for customer in customers %}
+        <li><a href = "{{customer.get_absolute_url}}"> {{ customer.firstname }} + ' ' + {{customer.lastname}} </a></li>
+      {% endfor %}
+  </ul>
+{% endblock content %}

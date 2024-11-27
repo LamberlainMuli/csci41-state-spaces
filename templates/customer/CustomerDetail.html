@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ customer.firstname }} + ' ' + {{customer.lastname}}
+{% endblock title %}
+{% block content %}
+  <h2>{{ customer.firstname }} + ' ' + {{customer.lastname}}</h2>
+  <p>Last Name: {{customer.lastname}}</p>
+  <p>First Name: {{ customer.firstname }}</p>
+  <p>Middle Initial: {{ customer.middle_initial }}</p>
+  <p>Birthdate: {{ customer.birthdate }}</p>
+  <p>Location: {{ customer.location}}</p>
+
+  <a href="{% url 'StateSpacesHub:customer' %}">
+    <button>Return to Customers</button>
+  </a>
+{% endblock content %}

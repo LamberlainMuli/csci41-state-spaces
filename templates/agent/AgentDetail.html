@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ agent.firstname }} + ' ' + {{agent.lastname}}
+{% endblock title %}
+{% block content %}
+  <h2>{{ agent.firstname }} + ' ' + {{agent.lastname}}</h2>
+  <p>Name: {{ agent.firstname }} + ' ' + {{agent.lastname}}</p>
+  <a href="{% url 'StateSpacesHub:agent' %}">
+    <button>Return to Agents</button>
+  </a>
+{% endblock content %}

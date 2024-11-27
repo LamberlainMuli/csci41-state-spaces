@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ team_member.team_member_name }}
+{% endblock title %}
+{% block content %}
+  <h2>{{ team_member.team_member_name }}</h2>
+  <p>Name: {{ team_member.team_member_name }}</p>
+  <a href="{% url 'StateSpacesHub:team_member' %}">
+    <button>Return to Team Members</button>
+  </a>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Agents
+{% endblock title %}
+{% block content %}
+  <h2>All Agents:</h2>
+  <ul>
+      {% for agent in agents %}
+        <li><a href = "{{agent.get_absolute_url}}">{{ agent.firstname }} + ' ' + {{agent.lastname}}</a></li>
+      {% endfor %}
+  </ul>
+{% endblock content %}

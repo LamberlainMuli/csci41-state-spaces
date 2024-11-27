@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Update Team Member
+{% endblock title %}
+{% block content %}
+  <h3>Edit Team Member</h3>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'team_member' pk=view.kwargs.pk %}">
+    <button>Cancel</button>
+  </a>
+  <a href="{% url 'team_member' pk=view.kwargs.pk %}">
+    <button>Done</button>
+  </a>
+{% endblock content %}

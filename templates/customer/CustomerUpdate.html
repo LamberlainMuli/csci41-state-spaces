@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Update Customer
+{% endblock title %}
+{% block content %}
+  <h3>Edit Customer</h3>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'customer' pk=view.kwargs.pk %}">
+    <button>Cancel</button>
+  </a>
+  <a href="{% url 'customer' pk=view.kwargs.pk %}">
+    <button>Done</button>
+  </a>
+{% endblock content %}

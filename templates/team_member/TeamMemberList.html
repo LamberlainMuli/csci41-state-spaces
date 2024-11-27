@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Team Members
+{% endblock title %}
+{% block content %}
+  <h2>All Team Members:</h2>
+  <ul>
+      {% for team_member in team_members %}
+        <li><a href = "{{team_member.get_absolute_url}}"> {{ team_member.team_member_name }}</a></li>
+      {% endfor %}
+  </ul>
+{% endblock content %}

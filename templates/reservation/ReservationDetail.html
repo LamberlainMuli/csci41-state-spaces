@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ reservation.reservationID }}
+{% endblock title %}
+{% block content %}
+  <h2>{{ reservation.reservationID }}</h2>
+  <p>CustomerID: {{reservation.customerID}}</p>
+  <p>Start Date and Time: {{ reservation.start_date_time }}</p>
+  <p>End Date and Time: {{ reservation.end_date_time }}</p>
+  <p>Number of Participants: {{ reservation.number_of_participants}}</p>
+
+  <a href="{% url 'StateSpacesHub:reservation' %}">
+    <button>Return to Customers</button>
+  </a>
+{% endblock content %}

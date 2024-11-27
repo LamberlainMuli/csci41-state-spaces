@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Renovations
+{% endblock title %}
+{% block content %}
+  <h2>All Renovations:</h2>
+  <ul>
+      {% for renovation in renovations %}
+        <li><a href = "{{renovation.get_absolute_url}}"> {{ renovation.renovationID }} </a></li>
+      {% endfor %}
+  </ul>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ renovation.renovationID }}
+{% endblock title %}
+{% block content %}
+  <h2>{{ renovation.renovationID }}</h2>
+  <p>RenovationID: {{ renovation.renovationID  }}</p>
+  
+  <a href="{% url 'StateSpacesHub:reservation' %}">
+    <button>Return to Customers</button>
+  </a>
+{% endblock content %}
