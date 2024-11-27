@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ building.building_name }}
+{% endblock title %}
+{% block content %}
+  <h2>{{ building.building_name }}</h2>
+  <p>Name: {{ building.building_name }}</p>
+  <a href="{% url 'building' %}">
+    <button>Return to Building</button>
+  </a>
+{% endblock content %}

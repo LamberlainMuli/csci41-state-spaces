@@ -7,8 +7,7 @@
   <h2>All Buildings:</h2>
   <ul>
       {% for building in buildings %}
-        <li>{{ building.building_name }}</li>
-        
+        <li><a href = "{{building.get_absolute_url}}"> {{ building.building_name }}</a></li>
       {% endfor %}
   </ul>
 {% endblock content %}

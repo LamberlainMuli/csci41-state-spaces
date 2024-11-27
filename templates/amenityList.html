@@ -7,9 +7,7 @@
   <h2>All Amenities:</h2>
   <ul>
       {% for amenity in amenities %}
-        <li>{{ amenity.venue }}</li>
-        <li>{{ amenity.amenity_type }}</li>
-        <li>{{ amenity.amenity_description }}</li>
+        <li><a href = "{{amenity.get_absolute_url}}">{{ amenity.amenity_type }}</a></li>
       {% endfor %}
   </ul>
 {% endblock content %}

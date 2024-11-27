@@ -7,14 +7,7 @@
   <h2>All Venues:</h2>
   <ul>
       {% for venue in venues %}
-        <li>{{ venue.venue_name }}</li>
-        <li>{{ venue.venue_type }}</li>
-        <li>{{ venue.venue_floor }}</li>
-        <li>{{ venue.venue_address }}</li>
-        <li>{{ venue.venue_city }}</li>
-        <li>{{ venue.venue_floor_area }}</li>
-        <li>{{ venue.venue_capacity }}</li>
-        <li>{{ venue.venue_status }}</li>
+        <li><a href = "{{venue.get_absolute_url}}"> {{ venue.venue_name }}</a></li>
       {% endfor %}
   </ul>
 {% endblock content %}
