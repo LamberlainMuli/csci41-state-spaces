@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  {{ venue.venue_name }}
+{% endblock title %}
+{% block content %}
+  <h2>{{ venue.venue_name }}</h2>
+  <p>Type: {{ venue.venue_type }}</p>
+  <p>Floor: {{ venue.venue_floor }}</p>
+  <p>Address: {{ venue.venue_address }}</p>
+  <p>City: {{ venue.venue_city }}</p>
+  <p>Floor Area: {{ venue.venue_floor_area }}</p>
+  <p>Capacity: {{ venue.venue_capacity }}</p>
+  <p>Status: {{ venue.venue_status }}</p>
+
+  <a href="{% url 'venue:venue_list' %}">
+    <button>Return to Venues</button>
+  </a>
+
+{% endblock content %}
