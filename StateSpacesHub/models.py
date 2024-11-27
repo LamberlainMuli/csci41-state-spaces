@@ -22,10 +22,15 @@ class Building(models.Model):
             )
 
     def get_absolute_url(self):
-        return reverse('building_detail', kwargs={'pk': self.pk})
+        return reverse('StateSpacesHub:building_detail', kwargs={'pk': self.pk})
 
 # Venue Model
 class Venue(models.Model):
+    STATUS_CHOICES = [
+        ("A", "Available"),
+        ("R", "Reserved"),
+        ("U", "Under Renovation"),
+    ]
     building = models.ForeignKey(Building, on_delete=models.CASCADE, related_name='venues')
     venue_name = models.CharField(max_length=255)
     venue_type = models.CharField(max_length=255, null=True, blank=True)
@@ -34,7 +39,12 @@ class Venue(models.Model):
     venue_city = models.CharField(max_length=255)
     venue_floor_area = models.PositiveIntegerField()
     venue_capacity = models.PositiveIntegerField()
-    venue_status = models.BooleanField(default=False)
+    venue_status = models.CharField(
+        max_length=1,
+        choices=STATUS_CHOICES,
+        default="A"  
+    )
+
 
     def __str__(self):
         return self.venue_name
@@ -54,7 +64,7 @@ class Venue(models.Model):
         return f"{self.venue_floor}, {self.building.building_name}, {self.venue_address}, {self.venue_city}"
 
     def get_absolute_url(self):
-        return reverse('venue_detail', kwargs={'pk': self.pk})
+        return reverse('StateSpacesHub:venue_detail', kwargs={'pk': self.pk})
     
 # Amenity Model
 class Amenity(models.Model):
@@ -66,7 +76,7 @@ class Amenity(models.Model):
         return self.amenity_type
 
     def get_absolute_url(self):
-        return reverse('amenity_detail', kwargs={'pk': self.pk})
+        return reverse('StateSpacesHub:amenity_detail', kwargs={'pk': self.pk})
 
 
 # class Agent(models.Model):

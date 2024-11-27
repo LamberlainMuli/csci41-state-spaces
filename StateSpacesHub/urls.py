@@ -3,7 +3,7 @@ from .views import BuildingListView, BuildingDetailView, VenueListView, VenueDet
 from .views import BuildingCreateView, BuildingUpdateView, VenueCreateView, VenueUpdateView, AmenityCreateView, AmenityUpdateView
 
 urlpatterns = [
-    path('building/list', BuildingListView.as_view(), name='Building'),
+    path('building/list', BuildingListView.as_view(), name='building'),
     path('building/<int:pk>', BuildingDetailView.as_view(), name='building_detail'),
     path('building/add', BuildingCreateView.as_view(), name='building_add'),
     path('building/<int:pk>/edit', BuildingUpdateView.as_view(), name='building_edit'),
