@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 # Building Model
 class Building(models.Model):
     building_name = models.CharField(max_length=255)
@@ -21,6 +21,8 @@ class Building(models.Model):
                 venue_capacity=100,
             )
 
+    def get_absolute_url(self):
+        return reverse('building_detail', kwargs={'pk': self.pk})
 
 # Venue Model
 class Venue(models.Model):
@@ -51,7 +53,9 @@ class Venue(models.Model):
     def venue_location(self):
         return f"{self.venue_floor}, {self.building.building_name}, {self.venue_address}, {self.venue_city}"
 
-
+    def get_absolute_url(self):
+        return reverse('venue_detail', kwargs={'pk': self.pk})
+    
 # Amenity Model
 class Amenity(models.Model):
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='amenities')  # Tied to one Venue
@@ -61,6 +65,8 @@ class Amenity(models.Model):
     def __str__(self):
         return self.amenity_type
 
+    def get_absolute_url(self):
+        return reverse('amenity_detail', kwargs={'pk': self.pk})
 
 
 # class Agent(models.Model):

@@ -4,8 +4,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from .models import Building, Venue, Amenity
+from .forms import BuildingForm, VenueForm, AmenityForm
 
-
+# Building Views
 class BuildingListView(ListView):
     model = Building
     template_name = 'buildingList.html'
@@ -30,7 +31,32 @@ class BuildingDetailView(DetailView):
         return context
 
 
+class BuildingCreateView(CreateView):
+    model = Building
+    form_class = BuildingForm
+    template_name = 'buildingCreate.html'
+    success_url = reverse_lazy('StateSpacesHub:building-list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        return context
+
+
+class BuildingUpdateView(UpdateView):
+    model = Building
+    form_class = BuildingForm
+    template_name = 'buildingUpdate.html'
+    success_url = reverse_lazy('StateSpacesHub:building-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        context['building'] = self.get_object()
+        return context
+
+
+# Venue Views
 class VenueListView(ListView):
     model = Venue
     template_name = 'venueList.html'
@@ -56,7 +82,32 @@ class VenueDetailView(DetailView):
         return context
 
 
+class VenueCreateView(CreateView):
+    model = Venue
+    form_class = VenueForm
+    template_name = 'venueCreate.html'
+    success_url = reverse_lazy('StateSpacesHub:venue-list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        return context
+
+
+class VenueUpdateView(UpdateView):
+    model = Venue
+    form_class = VenueForm
+    template_name = 'venueUpdate.html'
+    success_url = reverse_lazy('StateSpacesHub:venue-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        context['venue'] = self.get_object()
+        return context
+
+
+# Amenity Views
 class AmenityListView(ListView):
     model = Amenity
     template_name = 'amenityList.html'
@@ -77,4 +128,29 @@ class AmenityDetailView(DetailView):
         amenity = self.get_object()
         context['venue'] = amenity.venue  
         context['total_venues_with_amenity'] = Venue.objects.filter(amenities=amenity).count()
+        return context
+
+
+class AmenityCreateView(CreateView):
+    model = Amenity
+    form_class = AmenityForm
+    template_name = 'amenityCreate.html'
+    success_url = reverse_lazy('StateSpacesHub:amenity-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        return context
+
+
+class AmenityUpdateView(UpdateView):
+    model = Amenity
+    form_class = AmenityForm
+    template_name = 'amenityUpdate.html'
+    success_url = reverse_lazy('StateSpacesHub:amenity-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        context['amenity'] = self.get_object()
         return context
