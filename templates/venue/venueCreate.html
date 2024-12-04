@@ -1,14 +1,73 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block title %}
   Add Venue
 {% endblock title %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'venue/create.css' %}">
+{% endblock css %}
 {% block content %}
-  <h3>Create Venue</h3>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <br>
-    <button type="submit">Submit</button>
-  </form>
+<section>
+  <div class='container'  style="padding-top:5vw !important;">
+    <form method='post' id="amenity-form"> 
+      {% csrf_token %}
+      {% crispy form %}
+      <input type="hidden" id="id_amenity_set-TOTAL_FORMS" name="amenity_set-TOTAL_FORMS" value="{{ amenity_form.total_form_count }}">
+
+      <div id="amenity-formset-container"> 
+        {{ amenity_form.management_form }}
+        {{ amenity_form.non_form_errors }}
+        {% for form in amenity_form %}
+          <div class="amenity-form"> 
+            {% crispy form amenity_formhelper %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <button type="button" id="add-amenity" class="btn btn-secondary">Add Amenity</button> 
+      <input class='btn btn-primary' type='submit' value='Save'>
+    </form>
+  </div>
+</section>
+<template id="amenity-form-template"> 
+  <div class="amenity-form">
+    {% crispy amenity_form.empty_form amenity_formhelper %} 
+  </div>
+</template>
+
+<script>
+  // JavaScript for dynamic form addition (similar to previous examples)
+  const amenityFormContainer = document.getElementById('amenity-formset-container');
+  const addAmenityButton = document.getElementById('add-amenity');
+  const amenityFormTemplate = document.getElementById('amenity-form-template');
+
+  // Get the total number of forms from the management form
+  const totalFormsInput = document.getElementById('id_amenity_set-TOTAL_FORMS');
+  let totalForms = parseInt(totalFormsInput.value);
+  console.log(totalForms);
+  addAmenityButton.addEventListener('click', () => {
+    const newForm = amenityFormTemplate.content.cloneNode(true);
+
+    // Update form IDs and names
+    console.log(newForm);
+
+    const tempDiv = document.createElement('div');
+    tempDiv.appendChild(newForm);
+    const newFormHTML = tempDiv.innerHTML; 
+  
+    // Update form IDs and names in the string
+    const formRegex = /-__prefix__-/g; 
+    const updatedFormHTML = newFormHTML.replace(formRegex, `-${totalForms}-`);
+  
+    // Create a new DocumentFragment from the updated HTML string
+    const newFormFragment = document.createRange().createContextualFragment(updatedFormHTML);
+  
+  
+    // Increment total form count
+    totalFormsInput.value = ++totalForms;
+
+    amenityFormContainer.appendChild(newFormFragment);
+  });
+</script>
 {% endblock content %}

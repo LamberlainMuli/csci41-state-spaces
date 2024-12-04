@@ -1,13 +1,44 @@
 {% extends "base.html" %}
 {% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'building/list.css' %}">
+{% endblock css %}
 {% block title %}
-  Buildings
+Buildings
 {% endblock title %}
+
 {% block content %}
-  <h2>All Buildings:</h2>
-  <ul>
-      {% for building in buildings %}
-        <li><a href = "{{building.get_absolute_url}}"> {{ building.building_name }}</a></li>
-      {% endfor %}
-  </ul>
+<section class="building-list">
+    <div class="row" style="width:100%;">
+        <div class="col-md-4">
+          <div class="translucent-card">
+              <h2>Buildings</h2>
+              <p>Find the Perfect Building for Your Event or Workspace.</p>
+          </div>
+        </div>
+        <div class="building col-md-8">
+            <!-- <img class="building" src="{%static 'building/building.webp' %}" alt=""> -->
+        </div>
+        {% for building in buildings %}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <img class="building_image" src="http://127.0.0.1:8000/static/building/{{forloop.counter}}.webp" class="card-img-top" alt="{{ building.building_name }}">
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ building.building_name }}</h5>
+                        <a href="{{ building.get_absolute_url }}" class="btn btn-dark button">LEARN MORE</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-12">
+          <a href="{% url 'StateSpacesHub:building_add' %}" class="btn btn-light create-button">CREATE A BUILDING</a>
+        </div>
+    </div>
+</section>
 {% endblock content %}

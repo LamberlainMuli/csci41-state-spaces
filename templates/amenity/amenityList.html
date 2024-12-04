@@ -1,13 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'amenity/list.css' %}">
+{% endblock css %}
 {% block title %}
-  Amenities
+Amenities
 {% endblock title %}
+
 {% block content %}
-  <h2>All Amenities:</h2>
-  <ul>
-      {% for amenity in amenities %}
-        <li><a href = "{{amenity.get_absolute_url}}">{{ amenity.amenity_type }}</a></li>
-      {% endfor %}
-  </ul>
+<section class="amenity-list">
+    <div class="row" style="width:100%;">
+        <div class="col-md-4">
+          <div class="translucent-card">
+              <h2>Amenities</h2>
+              <p>State-of-the-Art Amenities, Tailored for You.</p>
+          </div>
+        </div>
+        <div class="amenity col-md-8">
+            <!-- <img class="amenity" src="{%static 'amenity/amenity.webp' %}" alt=""> -->
+        </div>
+        {% for amenity in amenities %}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img class="amenity_image card-img-top" src="http://127.0.0.1:8000/static/amenity/{{forloop.counter}}.webp"  alt="{{ amenity.amenity_name }}">
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ amenity.amenity_name }}</h5>
+                        <p>Type: {{amenity.amenity_type}}</p>
+                        <p>Description: {{amenity.amenity_description}}</p>
+                        <p>Quantity: {{amenity.amenity_quantity}}</p>
+                        <a href="{{ amenity.get_absolute_url }}" class="btn btn-dark button">LEARN MORE</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-12">
+          <a href="{% url 'StateSpacesHub:amenity_add' %}" class="btn btn-light create-button">CREATE AN AMENITY</a>
+        </div>
+    </div>
+</section>
 {% endblock content %}

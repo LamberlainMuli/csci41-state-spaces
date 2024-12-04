@@ -1,0 +1,185 @@
+section {
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+    text-align: center;
+    width:100%;
+    height: 56.25vw;
+    margin-top:-20px;
+}
+.hero {
+    background-image: url("hero.png"); 
+}
+.explore-venues {
+    background-image: url('explore_venues.png'); /* Replace with your image */
+}
+.check-amenities {
+    background-image: url('check_amenities.png'); /* Replace with your image */
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+    text-align: center;
+    width:100%;
+    height: 74.318vw;
+    margin-top:-20px;
+}
+.book-now {
+    background-image: url('book.png');
+}
+.card-img-top {
+    width:8vw;
+    margin:auto;
+    border-radius:50%;
+}
+.card-title {
+    font-size: 2vw;
+    font-family: Questrial;
+    margin: 0;
+    padding: 0;
+}
+
+.card-body h5 {
+    font-size: 2vw;
+    font-family: Questrial;
+    margin-bottom:2.5vw;
+}
+.card-body p {
+    font-size: 1.5vw;
+    font-family: Questrial;
+}
+.card-body {
+    padding:2vw;
+}
+.card {
+    padding-top:8%;
+    height: 0;
+    padding-bottom: 92%;
+    overflow: hidden;
+    scale:0.7;
+    background-image: linear-gradient(135deg, rgb(0% 0% 0%) 0%, rgb(0.011% 0.011% 0.011%) 6.25%, rgb(0.092% 0.092% 0.092%) 12.5%, rgb(0.31% 0.31% 0.31%) 18.75%, rgb(0.735% 0.735% 0.735%) 25%, rgb(1.436% 1.436% 1.436%) 31.25%, rgb(2.482% 2.482% 2.482%) 37.5%, rgb(3.941% 3.941% 3.941%) 43.75%, rgb(5.882% 5.882% 5.882%) 50%, rgb(8.375% 8.375% 8.375%) 56.25%, rgb(11.489% 11.489% 11.489%) 62.5%, rgb(15.292% 15.292% 15.292%) 68.75%, rgb(19.853% 19.853% 19.853%) 75%, rgb(25.241% 25.241% 25.241%) 81.25%, rgb(31.526% 31.526% 31.526%) 87.5%, rgb(38.775% 38.775% 38.775%) 93.75%, rgb(47.059% 47.059% 47.059%) 100% );
+    box-shadow: 0 0 5px 5px rgba(255,255,255, 0.7); /* Adjust shadow as needed */
+
+}
+
+
+.meet-agents {
+    color: white;
+    width:100%; 
+    padding:7vw;
+    text-align:left
+}
+.meet-agents h2 {
+    font-size: 4vw;
+    font-family: Questrial;
+    margin: 0;
+    margin-bottom:40px;
+    padding: 0;
+}
+
+.meet-agents p {
+    font-size: 1.5vw;
+    font-family: Questrial;
+    margin: 0;
+    padding: 0;
+}
+.translucent-card {
+    background-color: rgba(0, 0, 0, 0.1) !important; /* Adjust transparency as needed */
+    background-image: linear-gradient(to top left, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.7)); /* Adjust gradient as needed */
+    border-radius: 4vw; /* Adjust border-radius as needed */
+    padding: 20px; /* Adjust padding as needed */
+    width:80%;
+    height:61%;
+    padding-left:20% !important;
+    color:white;
+    text-align: left;  
+    margin: auto;
+    margin-right:1% !important;
+    box-shadow: 0 0 5px 5px rgba(255,255,255, 0.7); /* Adjust shadow as needed */
+}
+.translucent-card h2 {
+    font-size: 4vw;
+    font-family: Questrial; 
+}
+.translucent-card p {
+    font-size: 2.5vw;
+    font-family: Questrial;
+}
+.translucent-card .text {
+    padding-left:5% !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.building {
+    width:85%;
+    border-radius: 4vw;
+    margin: 23% 10% 1% 5%;
+}
+.button {
+    width:85% ;
+    padding: 1.5vw 1.5vw;
+    font-size:2vw;
+    font-family: Hanken Grotesk;
+    text-transform: capitalize;
+    border-radius:4vw;
+    margin: 1% 10% 23% 5%;
+    letter-spacing:   0.2vw;
+}
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+  }
+.check-amenities > .button {
+    background-color:black;
+    width:25vw;
+    position:relative;
+    top:55%;
+    left:2%;   
+    float:left;
+
+}
+
+.book-now > .button {
+    background-color:black;
+    width:25vw;
+    position:relative;
+    top:55%;
+    left:3%;   
+    float:left;
+}
+
+
+.hero > .header {
+    position:relative;
+    top:35%;
+    left:8%;   
+    float:left;
+}
+.hero > .header > h1{
+    line-height: 0.9;
+    text-align: left;
+    font-family: Questrial;
+    font-size:6vw;
+    width:50vw;
+    color:white;
+}
+
+@media (max-width: 1724px) {
+
+
+}
+
+@media (max-width: 1124px) {
+
+}
+
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 580px) {
+
+}

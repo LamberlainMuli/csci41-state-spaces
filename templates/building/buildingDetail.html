@@ -1,12 +1,48 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-  {{ building.building_name }}
+{{ building.building_name }} - Venues
 {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'building/detail.css' %}">
+{% endblock css %}
 {% block content %}
-  <h2>{{ building.building_name }}</h2>
-  <p>Name: {{ building.building_name }}</p>
-  <a href="{% url 'StateSpacesHub:building' %}">
-    <button>Return to Buildings</button>
-  </a>
+<section class="building-detail">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="translucent-card">
+                <img src="http://127.0.0.1:8000/static/building/detail.webp" class="card-img-top" alt="{{ building.building_name }} Image">
+                <h2>{{building.building_name}}</h2>
+                <h2>Address: {{building.building_address}}</h2>
+                <h2>City: {{building.building_city}}</h2>
+            </div>
+          </div>
+          <h1>List of Venues in Building</h1> 
+        </div>
+          {% for venue in building.venues.all %} 
+          <div class="col-md-12"> 
+              <div class="card">
+                  <div class="row">
+                      <div class="col-sm-4">
+                          <img class="venue_image card-img-top" src="http://127.0.0.1:8000/static/venue/{{forloop.counter}}.webp"  alt="{{ venue.venue_name }}">
+                      </div>
+                      <div class="col-sm-8">
+                          <div class="card-body">
+                              <h5 class="card-title">{{ venue.venue_name }}</h5>
+                              <p>Type: {{ venue.venue_type }}</p>
+                              <p>Floor: {{ venue.venue_floor }}</p> 
+                              <a href="{{ venue.get_absolute_url }}" class="btn btn-dark button">LEARN MORE</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="col-md-12 mt-4"> 
+            <a href="{% url 'StateSpacesHub:venue_add' %}" class="btn btn-light create-button">ADD A VENUE TO THIS BUILDING </a>
+        </div>
+    </div>
+</section>
 {% endblock content %}

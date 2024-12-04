@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  State Spaces
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'pages/home/main.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="header">
+        <h1>Where ideas find the perfect place to work.</h1>
+    </div>
+</section>
+
+<section class="explore-venues"  style="width:100%;height: 56.25vw;">
+    <div class="row"  style="width:100%;height: 56.25vw;">
+        <div class="col-sm-6 d-flex align-items-center"> 
+            <div class="translucent-card">
+                <div class="text">
+                    <h2>Flexible Spaces for Your Every Need</h2>
+                    <p>Work, Meet, Learn, and Celebrate!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row" style="width:100%;height:100%">
+                <div class="col-sm-12">
+                    <img src="{% static 'pages/home/building.webp' %}" class="img-fluid building" alt="Office Image"> 
+                </div>
+                <br>
+                <div class="col-sm-12">
+                    <a href="{% url 'StateSpacesHub:venue' %}" class="button btn btn-light">EXPLORE OUR VENUES</a>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4"> 
+        
+        <div class="col-sm-6 text-center">
+            
+        </div>
+    </div>
+</section>
+<section class="meet-agents">
+    <h2>Meet Our Agents</h2>
+    <p> Our dedicated agents ensure every venue is perfectly maintained and ready to meet your needs. From managing reservations to overseeing renovations, our team works behind the scenes to make your experience seamless. </p>
+    <div class="row agents">
+        {% for agent,description in agent_description %}
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="static/pages/home/{{forloop.counter}}.jpg" class="card-img-top" alt="{{ agent.name }}" height="200" width="200">
+                <div class="card-body">
+                    <h5 class="card-title">{{ agent.first_name }} {{ agent.last_name }}</h5>
+                    
+                    <p class="card-text">{{ description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>    
+</section>
+
+<section class="check-amenities">
+    <a href="{%url 'StateSpacesHub:amenity'%}" class="button btn btn-dark">CHECK AMENITIES</a>
+    </section>
+
+<section class="book-now">
+    <a href="#" class="button btn btn-dark">BOOK NOW</a>
+
+    </section>
+
+
+{% endblock content %}

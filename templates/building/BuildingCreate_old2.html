@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Add Building
+{% endblock title %}
+
+{% block content %}
+<h3>Create Building</h3>
+
+<form method="post" id="id_html_form" autocomplete="off"> 
+  {% csrf_token %}
+
+  <div id="id_formset_container">
+    {% for field in form %}
+      {{ field.errors }}
+      {{ field.label_tag }} : {{ field }}
+    {% endfor %}
+    {{ venue_formset.management_form }}
+    <table id="venue-table">
+      <thead>
+        <tr>
+          <th>Venue Name</th>
+          <th>Type</th>
+          <th>Floor</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>Floor Area</th>
+          <th>Capacity</th>
+          <th>Status</th>
+          <th></th> 
+        </tr>
+      </thead>
+      <tbody>
+        {% for form in venue_formset %}
+        <tr data-form-index="{{ forloop.counter0 }}"> 
+          <td>{{ form.venue_name }}</td>
+          <td>{{ form.venue_type }}</td>
+          <td>{{ form.venue_floor }}</td>
+          <td>{{ form.venue_address }}</td>
+          <td>{{ form.venue_city }}</td>
+          <td>{{ form.venue_floor_area }}</td>
+          <td>{{ form.venue_capacity }}</td>
+          <td>{{ form.venue_status }}</td>
+          <td>
+            {% if venue_formset.can_delete %}
+            {{ form.DELETE }} 
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <template id="id_formset_empty_form">
+    <tr> 
+      <td>{{ venue_formset.empty_form.venue_name }}</td>
+      <td>{{ venue_formset.empty_form.venue_type }}</td>
+      <td>{{ venue_formset.empty_form.venue_floor }}</td>
+      <td>{{ venue_formset.empty_form.venue_address }}</td>
+      <td>{{ venue_formset.empty_form.venue_city }}</td>
+      <td>{{ venue_formset.empty_form.venue_floor_area }}</td>
+      <td>{{ venue_formset.empty_form.venue_capacity }}</td>
+      <td>{{ venue_formset.empty_form.venue_status }}</td>
+      <td>
+        {% if venue_formset.can_delete %}
+          {{ venue_formset.empty_form.DELETE }} 
+        {% endif %}
+      </td>
+    </tr>
+  </template>
+
+  <div id="id_formset_add_button" style="text-decoration: underline; cursor: pointer;">Add Venue</div>
+  <input id="id_formset_submit_button" type="submit" value="Submit"> 
+</form>
+
+<script>
+  window.addEventListener('load', (event) => {
+    // Get form template and total number of forms from management form
+    const templateForm   
+ = document.getElementById('id_formset_empty_form');
+    const inputTotalForms = document.querySelector('input[id$="-TOTAL_FORMS"]');
+    const inputInitialForms = document.querySelector('input[id$="-INITIAL_FORMS"]');
+
+    // Get our container (e.g. <table>, <ul>, or <div>) and "Add" button
+    const containerFormSet = document.getElementById('id_formset_container');
+    const buttonAdd = document.getElementById('id_formset_add_button');
+    const buttonSubmit = document.getElementById('id_formset_submit_button');
+
+    // Event handlers
+    buttonAdd.onclick = addForm;
+    buttonSubmit.onclick = updateNameAttributes;
+
+    // Form counters   
+
+    const initialForms = Number(inputInitialForms.value);
+    let extraFormIndices = [];
+    let nextFormIndex = initialForms;
+
+    function addForm() {
+      // Create DocumentFragment from template
+      const formFragment = templateForm.content.cloneNode(true);   
+
+
+      for (let element of formFragment.children) {
+        // Replace the __prefix__ placeholders from the empty form by the actual form index
+        element.innerHTML = element.innerHTML.replace(
+          /(?<=\w+-)(__prefix__|\d+)(?=-\w+)/g,
+          nextFormIndex.toString()
+        );
+
+        // Add a custom attribute to simplify bookkeeping
+        element.dataset.formIndex = nextFormIndex.toString();
+
+        // Add a delete click handler (if formset can_delete)
+        setDeleteHandler(element);   
+
+      }
+
+      // Add the new form to the DOM
+      containerFormSet.querySelector('tbody').appendChild(formFragment);
+
+      // Keep track of form indices
+      extraFormIndices.push(nextFormIndex++);
+
+      // Update total form count
+      inputTotalForms.value = nextFormIndex;
+    }
+
+    function removeForm(event) {
+      // Remove all elements with form-index matching that of the delete-input
+      const formIndex = event.target.dataset.formIndex;
+      for (let element of getFormElements(formIndex)) {
+        element.remove();
+      }
+
+      // Remove form index from array
+      let indexIndex = extraFormIndices.indexOf(Number(formIndex));
+      if (indexIndex > -1) {
+        extraFormIndices.splice(indexIndex, 1);   
+
+      }
+
+      // Update total form count
+      inputTotalForms.value = nextFormIndex - 1;
+    }
+
+    function setDeleteHandler(containerElement) {
+      // Modify DELETE checkbox in containerElement, if the checkbox exists
+      const inputDelete = containerElement.querySelector('input[id$="-DELETE"]');
+      if (inputDelete) {
+        inputDelete.dataset.formIndex = containerElement.dataset.formIndex;
+        inputDelete.onclick = removeForm;
+      }
+    }
+
+    function getFormElements(index)   
+ {
+      return containerFormSet.querySelectorAll('[data-form-index="' + index + '"]');
+    }
+
+    function updateNameAttributes(event) {
+      // Make sure the name indices are consecutive and smaller than TOTAL_FORMS
+      for (let [consecutiveIndex, formIndex] of extraFormIndices.entries()) {
+        for (let formElement of getFormElements(formIndex)) {
+          for (let element of formElement.querySelectorAll('input, select')) {
+            if ('name' in element) {
+              element.name = element.name.replace(
+                /(?<=\w+-)(__prefix__|\d+)(?=-\w+)/g,
+                (initialForms + consecutiveIndex).toString()
+              );
+            }
+          }
+        }
+      }
+      updateTotalFormCount();
+    }
+
+    function updateTotalFormCount(event)   
+ {
+      const firstElement = templateForm.content.querySelector('input, select');
+      if (firstElement) {
+        let suffix = firstElement.id.split('__prefix__')[1];
+        let selector = firstElement.tagName.toLowerCase() + '[id$="' + suffix + '"]';
+        let allElementsForId = containerFormSet.querySelectorAll(selector);   
+
+        inputTotalForms.value = allElementsForId.length;
+      }
+    }
+  }, false);
+</script>
+{% endblock content %}

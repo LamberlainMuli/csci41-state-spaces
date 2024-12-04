@@ -7,7 +7,7 @@
   <h2>All Customers:</h2>
   <ul>
       {% for customer in customers %}
-        <li><a href = "{{customer.get_absolute_url}}"> {{ customer.firstname }} + ' ' + {{customer.lastname}} </a></li>
+        <li><a href = "{{customer.get_absolute_url}}"> {{ customer.first_name }}  {{customer.last_name}} </a></li>
       {% endfor %}
   </ul>
 {% endblock content %}

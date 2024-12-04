@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Add Building
+{% endblock title %}
+
+{% block content %}
+  <h3>Create Building</h3>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+      {{ field.errors }}
+      {{ field.label_tag }} : {{ field }}
+    {% endfor %}
+    {% if form.errors %}
+      <p style="color: red;">{{ form.errors }}</p> {/* Display building form errors */}
+    {% endif %}
+
+    {{ form.venues.management_form }}
+    <table id="venue-table">
+      <!-- Add hidden field that calculates the total number of forms from the management form -->
+      <input type="hidden" id="id_venue_set-TOTAL_FORMS" name="venue_set-TOTAL_FORMS" value="{{ venue_formset.total_form_count }}">
+      <thead>
+        <tr>
+          <th>Venue Name</th>
+          <th>Type</th>
+          <th>Floor</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>Floor Area</th>
+          <th>Capacity</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for form in venue_formset %}
+          <tr>
+            <td>{{ form.venue_name }}</td>
+            <td>{{ form.venue_type }}</td>
+            <td>{{ form.venue_floor }}</td>
+            <td>{{ form.venue_address }}</td>
+            <td>{{ form.venue_city }}</td>
+            <td>{{ form.venue_floor_area }}</td>
+            <td>{{ form.venue_capacity }}</td>
+            <td>{{ form.venue_status }}</td>
+            <td><button type="button" class="delete-venue">Delete</button></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <button type="button" id="add-venue">Add Venue</button>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Add a script that will 
+
+    const venueTable = document.getElementById('venue-table');
+    const addVenueButton = document.getElementById('add-venue');
+
+    // Get the template for new forms
+    const templateForm = document.querySelector('#venue-table tbody tr:first-child').cloneNode(true);
+
+    // Get the total number of forms from the management form
+    const totalFormsInput = document.getElementById('id_venue_set-TOTAL_FORMS');
+    let totalForms = parseInt(totalFormsInput.value);
+
+    addVenueButton.addEventListener('click', () => {
+      const newForm = templateForm.cloneNode(true);
+
+      // Update form IDs and names
+      const formRegex = /form-(?:\d+)-/g;
+      newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${totalForms}-`);
+
+      // Increment total form count
+      totalFormsInput.value = ++totalForms;
+
+      // Add delete button event listener to the new form
+      newForm.querySelector('.delete-venue').addEventListener('click', deleteVenue);
+
+      // Add the new form to the table
+      venueTable.querySelector('tbody').appendChild(newForm);
+    });
+
+    // Delete venue function
+    function deleteVenue(event) {
+      const row = event.target.closest('tr');
+      row.remove();
+
+      // Decrement total form count (if needed) - You might need to adjust this if you have a minimum number of forms
+      totalFormsInput.value = --totalForms; 
+    }
+
+    // Add event listeners to existing delete buttons
+    const deleteButtons = document.querySelectorAll('.delete-venue');
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', deleteVenue);
+    });
+
+    // Function to restore formset data
+    function restoreFormsetData() {
+        
+        var venueFormsetData = JSON.parse('{{ vformset.data|safe }}');
+        if (venueFormsetData.length > 0) {
+          for (let i = 0; i < venueFormsetData.length; i++) {
+            // Get the form index
+            const formIndex = venueFormsetData[i].formIndex;
+            // Set values for each field (assuming they are simple input fields)
+            const venueNameInput = document.querySelector(`#id_venue_set-${formIndex}-venue_name`);
+            if (venueNameInput) {
+              venueNameInput.value = "{{ form.venue_name.value|escapejs }}"; 
+            }
+          }
+        }
+        else {
+          console.log('No formset data found');
+        }   
+      }
+      
+      // Call the function to restore formset data on page load
+      restoreFormsetData(); 
+  </script>
+{% endblock content %}

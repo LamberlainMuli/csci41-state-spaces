@@ -3,12 +3,24 @@
 {% block title %}
   Add Amenity
 {% endblock title %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'amenity/create.css' %}">
+{% endblock css %}
 {% block content %}
-  <h3>Create Amenity</h3>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <br>
-    <button type="submit">Submit</button>
-  </form>
+  <section>
+    <div class="container">
+      <h1>Create Amenity</h1>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <br>
+        <div class="row" style="padding-top:2vw;">
+          <a href="{% url 'StateSpacesHub:amenity' %}" class="button col-md-6 btn btn-light">Return</a>
+          <input class='button col-md-6 btn btn-light' type='submit' value='Save'>
+          </div>
+
+      </form>
+    </div>
+  </section>
 {% endblock content %}

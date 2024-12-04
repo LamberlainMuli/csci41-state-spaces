@@ -1,20 +1,76 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-  {{ venue.venue_name }}
+  {{ venue.venue_name }} - Details
 {% endblock title %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'venue/detail.css' %}">
+{% endblock css %}
 {% block content %}
-  <h2>{{ venue.venue_name }}</h2>
-  <p>Type: {{ venue.venue_type }}</p>
-  <p>Floor: {{ venue.venue_floor }}</p>
-  <p>Address: {{ venue.venue_address }}</p>
-  <p>City: {{ venue.venue_city }}</p>
-  <p>Floor Area: {{ venue.venue_floor_area }}</p>
-  <p>Capacity: {{ venue.venue_capacity }}</p>
-  <p>Status: {{ venue.venue_status }}</p>
-
-  <a href="{% url 'StateSpacesHub:venue' %}">
-    <button>Return to Venues</button>
-  </a>
-
+  <section class="venue-detail">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="translucent-card">
+          <img src="{% static 'venue/detail.webp' %}"
+               class="card-img-top"
+               alt="{{ venue.venue_name }} Image">
+          <h2>{{ venue.venue_name }}</h2>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Venue ID:</th>
+                <td>{{ venue.pk }}</td>
+                <th>Type:</th>
+                <td>{{ venue.venue_type }}</td>
+              </tr>
+              <tr>
+                <th>Building:</th>
+                <td>{{ venue.building.building_name }}</td>
+                <th>Capacity:</th>
+                <td>{{ venue.venue_capacity }}</td>
+              </tr>
+              <tr>
+                <th>Address:</th>
+                <td>{{ venue.building.building_address }}</td>
+                <th>Floor:</th>
+                <td>{{ venue.venue_floor }}</td>
+              </tr>
+              <tr>
+                <th>Floor area:</th>
+                <td>{{ venue.venue_floor_area }}</td>
+                <th>City:</th>
+                <td>{{ venue.building.building_city }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <h1>List of Amenities in Venue</h1>
+    {% for amenity in venue.amenities.all %}
+      <div class="card">
+        <div class="row" >
+          <div class="col-sm-6">
+            <img class="amenity_image card-img-top"
+                 src="http://127.0.0.1:8000/static/amenity/{{ forloop.counter }}.webp"
+                 alt="{{ amenity.amenity_name }}">
+          </div>
+          <div class="col-sm-6">
+            <div class="card-body">
+              <h5 class="card-title">{{ amenity.amenity_name }}</h5>
+              <p>Type: {{ amenity.amenity_type }}</p>
+              <p>Description: {{ amenity.amenity_description }}</p>
+              <p>Quantity: {{ amenity.amenity_quantity }}</p>
+              <a href="{{ amenity.get_absolute_url }}" class="btn btn-dark button">LEARN MORE</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="col-md-12 mt-4">
+    <a href="{% url 'StateSpacesHub:amenity_add' %}"
+       class="btn btn-light create-button">CREATE AN AMENITY</a>
+  </div>
+</section>
 {% endblock content %}

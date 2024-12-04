@@ -3,12 +3,28 @@
 {% block title %}
   {{ amenity.amenity_type }}
 {% endblock title %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'amenity/detail.css' %}">
+{% endblock css %}
 {% block content %}
-  <h2>{{ amenity.amenity_type }}</h2>
-  <p>Description: {{ amenity.amenity_description }}</p>
-  <p>Venue: {{ amenity.venue }}</p>
-  <a href="{% url 'StateSpacesHub:amenity' %}">
-    <button>Return to Amenities</button>
-  </a>
+  <section class="amenity-detail">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="translucent-card">
 
+          <img src="{% static 'amenity/1.webp' %}"
+          class=" amenity_image card-img-top"
+          alt="{{ amenity.amenity_type }} Image">
+
+          <h2>{{ amenity.amenity_type }}</h2>
+          <p>Description: {{ amenity.amenity_description }}</p>
+          <p>Quantity: {{amenity.amenity_quantity}}</p>
+          <p>Venue: {{ amenity.venue }}</p>
+          <p>Building: {{amenity.venue.building.building_name}}</p>
+        </div>
+      
+    </div>
+    <a class="button btn btn-light col-md-12"
+       href="{% url 'StateSpacesHub:amenity' %}">Return to Amenities</a>
+  </section>
 {% endblock content %}

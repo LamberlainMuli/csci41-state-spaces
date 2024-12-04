@@ -1,14 +1,29 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block title %}
   Add Building
 {% endblock title %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'building/create.css' %}">
+{% endblock css %}
 {% block content %}
-  <h3>Create Building</h3>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <br>
-    <button type="submit">Submit</button>
-  </form>
+  <section>
+    <div class="container" style="padding-top:5vw !important;">
+      <form method='post'>
+      {% csrf_token %}
+      {% crispy form %}
+      {{ venue_form.management_form }}
+      {{ venue_form.non_form_errors }}
+      {% crispy venue_form venue_formhelper %}
+      {{ amenity_form.management_form }}
+      {{ amenity_form.non_form_errors }}
+      {% crispy amenity_form amenity_formhelper %}
+        <div class="row">
+        <a href="{% url 'StateSpacesHub:building' %}" class="button col-md-6 btn btn-light">Return</a>
+        <input class='button col-md-6 btn btn-light' type='submit' value='Save'>
+        </div>
+      </form>
+    </div>
+  </section>
 {% endblock content %}

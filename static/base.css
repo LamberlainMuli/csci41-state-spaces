@@ -1,0 +1,46 @@
+body {
+    background-color:black;
+    color:white;
+    font-family: Questrial;
+}
+
+h2 {
+    color: white;
+    font-family: Questrial;
+    font-size: 3vw;
+    margin-top:5vw;
+}
+
+.navbar {
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Ensure navbar is on top */
+
+}
+
+
+.navbar li {
+    color:white !important;
+    font-size:1vw;
+    text-shadow: 10px;
+}
+  .breadcrumb {
+    background-color: rgba(255, 255, 255, 0); /* Translucent background */
+    margin-bottom: 0; /* Remove default bottom margin */
+    justify-content: flex-end; /* Align breadcrumb to the right */
+  }
+
+
+.navbar-light .navbar-nav .nav-link {
+    color: white !important;
+    text-shadow: 1px 1px black;
+
+}
+.navbar-brand  {
+    color: white !important;
+    font-size:1vw;
+    text-shadow: 2px 2px black;
+
+}

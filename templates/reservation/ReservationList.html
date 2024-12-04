@@ -7,7 +7,19 @@
   <h2>All Reservations:</h2>
   <ul>
       {% for reservation in reservations %}
-        <li><a href = "{{reservation.get_absolute_url}}"> {{ reservation.reservationID }} </a></li>
+        <li><a href = "{{reservation.get_absolute_url}}"> {{ reservation.pk }} </a>
+          <br>
+          start: {{ reservation.start_date_time }}
+          <br>
+          end: {{ reservation.end_date_time }}
+          <br>
+          customer: {{ reservation.customer }}
+          <br>
+          venue: {{ reservation.venue.venue_name }}  
+          
+          
+        
+        </li>
       {% endfor %}
   </ul>
 {% endblock content %}

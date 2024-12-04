@@ -1,0 +1,75 @@
+label {
+    font-size: 1.5vw;
+    font-family: Questrial;
+    color: white;
+    float:left !important;
+}
+
+h1 {
+    font-size: 3vw;
+    font-family: Questrial;
+    color: white;
+    margin-top: vw;
+}
+
+input,select, textarea {
+    background-color: rgba(255,255,255, 0.2) !important;
+    border-radius: 1.5vw !important; 
+    color:white !important;
+    font-family: Questrial;
+    font-size: 3vw;
+    text-shadow: 1px 1px black;
+    float:left !important;
+    width:100%;
+}
+
+select {
+    font-size:1.5vw !important;
+    height: 3vw !important;
+}
+
+
+textarea {
+    font-size:1.5vw !important;
+    border-radius:1vw !important;
+    padding:1vw !important; 
+    height:10vw;
+}
+.button {
+    background-color: white;
+    font-size:1.5vw;
+    scale:0.9;
+    font-family: Hanken Grotesk;
+    text-transform: capitalize;
+    border-radius:4vw;
+    letter-spacing:   0.2vw;
+}
+section {
+    background-image: url("createbg.png");
+    background-size: contain;
+    background-position: top;
+    background-repeat: repeat;
+    text-align: center;
+    width:100%;
+    min-height: 145.27845vw;
+    padding-top:5vw;
+}
+
+
+
+form > fieldset:nth-of-type(2) {
+    margin-left:2vw;
+}
+
+form > fieldset:nth-of-type(2) > legend {
+    font-size: 2.5vw;   
+}
+
+
+
+option{
+    font-size:1.5vw !important;
+    height: 3vw !important;
+    background-color: rgba(255,255,255, 0.2) !important;
+    color:black !important;
+}
